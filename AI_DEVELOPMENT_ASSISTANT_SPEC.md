@@ -299,15 +299,10 @@ class CodeValidator:
 ### 4.1 MCP Server Configuration
 
 ```bash
-# Add GitLab MCP to Kimi CLI
+# Add GitLab MCP to Kimi CLI (self-hosted GitLab)
 kimi mcp add --transport stdio gitlab -- \
   npx -y @modelcontextprotocol/server-gitlab \
-  --env GITLAB_PERSONAL_ACCESS_TOKEN=glpat-xxxxxxxx
-
-# Or for self-hosted GitLab
-kimi mcp add --transport stdio gitlab -- \
-  npx -y @modelcontextprotocol/server-gitlab \
-  --env GITLAB_PERSONAL_ACCESS_TOKEN=glpat-xxxxxxxx \
+  --env GITLAB_PERSONAL_ACCESS_TOKEN=eBW26W7e4PCYPvsXkZzp \
   --env GITLAB_API_URL=https://gitlab.expertflow.com/api/v4
 ```
 
@@ -973,7 +968,8 @@ class CodeGenerator:
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-gitlab"],
       "env": {
-        "GITLAB_PERSONAL_ACCESS_TOKEN": "glpat-xxx"
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "eBW26W7e4PCYPvsXkZzp",
+        "GITLAB_API_URL": "https://gitlab.expertflow.com/api/v4"
       }
     },
     "jira": {
@@ -1053,8 +1049,8 @@ services:
   executor:
     image: devbot/executor:latest
     environment:
-      - GITLAB_TOKEN=${GITLAB_TOKEN}
-      - GITLAB_URL=${GITLAB_URL}
+      - GITLAB_URL=https://gitlab.expertflow.com
+      - GITLAB_TOKEN=eBW26W7e4PCYPvsXkZzp
       
   validator:
     image: devbot/validator:latest
@@ -1094,7 +1090,7 @@ EMBEDDING_MODEL=text-embedding-3-large
 
 # GitLab
 GITLAB_URL=https://gitlab.expertflow.com
-GITLAB_TOKEN=glpat-xxx
+GITLAB_TOKEN=eBW26W7e4PCYPvsXkZzp
 
 # Jira
 JIRA_DOMAIN=expertflow-docs.atlassian.net
